@@ -45,8 +45,17 @@ function sendData(request, response) {
 
 // Post Route
 
-app.post("/add", callBack);
+app.post("/add", addEntry);
 
-function callBack(req, res) {
-  res.send("POST received");
+function addEntry(request, response) {
+  data = request.body;
+
+  if (data) {
+    (projectData.temperature = data.temperature),
+      (projectData.feelings = data.feelings),
+      (projectData.date = data.date);
+    response.send({ status: 200 });
+  } else {
+    response.send({ status: 500 });
+  }
 }
